@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.icloud.dao.event.SendLimitMapper" >
+  <resultMap id="BaseResultMap" type="com.icloud.model.event.SendLimit" >
+    <id column="SEND_TYPE" property="sendType" jdbcType="VARCHAR" />
+    <id column="OPENID" property="openid" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="DATE" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SEND_TYPE, OPENID, CREATE_TIME, STATUS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.icloud.model.event.SendLimitKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_SEND_LIMIT
+    where SEND_TYPE = #{sendType,jdbcType=VARCHAR}
+      and OPENID = #{openid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.icloud.model.event.SendLimitKey" >
+    delete from T_SEND_LIMIT
+    where SEND_TYPE = #{sendType,jdbcType=VARCHAR}
+      and OPENID = #{openid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.icloud.model.event.SendLimit" >
+    insert into T_SEND_LIMIT (SEND_TYPE, OPENID, CREATE_TIME, 
+      STATUS)
+    values (#{sendType,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
+      #{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.icloud.model.event.SendLimit" >
+    insert into T_SEND_LIMIT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sendType != null" >
+        SEND_TYPE,
+      </if>
+      <if test="openid != null" >
+        OPENID,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sendType != null" >
+        #{sendType,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.icloud.model.event.SendLimit" >
+    update T_SEND_LIMIT
+    <set >
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SEND_TYPE = #{sendType,jdbcType=VARCHAR}
+      and OPENID = #{openid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.icloud.model.event.SendLimit" >
+    update T_SEND_LIMIT
+    set CREATE_TIME = #{createTime,jdbcType=DATE},
+      STATUS = #{status,jdbcType=VARCHAR}
+    where SEND_TYPE = #{sendType,jdbcType=VARCHAR}
+      and OPENID = #{openid,jdbcType=VARCHAR}
+  </update>
+</mapper>

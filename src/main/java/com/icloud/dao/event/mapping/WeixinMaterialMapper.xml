@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.icloud.dao.event.WeixinMaterialMapper" >
+  <resultMap id="BaseResultMap" type="com.icloud.model.event.WeixinMaterial" >
+    <result column="ID" property="id" jdbcType="NUMERIC" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="DATE" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="DATE" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="PIC_URL" property="picUrl" jdbcType="VARCHAR" />
+    <result column="WX_PIC_URL" property="wxPicUrl" jdbcType="VARCHAR" />
+    <result column="MEDIA_ID" property="mediaId" jdbcType="VARCHAR" />
+    <result column="PARENT_ID" property="parentId" jdbcType="NUMERIC" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+     <result column="DEFAULTS" property="defaults" jdbcType="VARCHAR" />
+      <result column="VIST_URL" property="vistUrl" jdbcType="VARCHAR" />
+  </resultMap>
+    <sql id="Base_Column_List" >
+    ID, CREATE_TIME, MODIFY_TIME, TITLE, PIC_URL, WX_PIC_URL, MEDIA_ID, PARENT_ID, DESCRIPTION, 
+    DEFAULTS, VIST_URL
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_WEIXIN_MATERIAL
+    where ID = #{id,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_WEIXIN_MATERIAL
+    where ID = #{id,jdbcType=NUMERIC}
+  </delete>
+  <insert id="insert" parameterType="com.icloud.model.event.WeixinMaterial" >
+  	<selectKey order="BEFORE" keyProperty="id" resultType="java.lang.Long">
+	    	SELECT SQ_t_Weixin_Material.NEXTVAL FROM DUAL
+		</selectKey>
+    insert into T_WEIXIN_MATERIAL (ID, CREATE_TIME, MODIFY_TIME, 
+      TITLE, PIC_URL, WX_PIC_URL, 
+      MEDIA_ID, PARENT_ID, DESCRIPTION, 
+      DEFAULTS, VIST_URL)
+    values (#{id,jdbcType=NUMERIC}, #{createTime,jdbcType=DATE}, #{modifyTime,jdbcType=DATE}, 
+      #{title,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR}, #{wxPicUrl,jdbcType=VARCHAR}, 
+      #{mediaId,jdbcType=VARCHAR}, #{parentId,jdbcType=NUMERIC}, #{description,jdbcType=VARCHAR},
+      #{defaults,jdbcType=VARCHAR}, #{vistUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.icloud.model.event.WeixinMaterial" >
+    insert into T_WEIXIN_MATERIAL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="picUrl != null" >
+        PIC_URL,
+      </if>
+      <if test="wxPicUrl != null" >
+        WX_PIC_URL,
+      </if>
+      <if test="mediaId != null" >
+        MEDIA_ID,
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION,
+      </if>
+      <if test="defaults != null" >
+        DEFAULTS,
+      </if>
+       <if test="vistUrl != null" >
+        VIST_URL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=NUMERIC},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=DATE},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null" >
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="wxPicUrl != null" >
+        #{wxPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="mediaId != null" >
+        #{mediaId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=NUMERIC},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+       <if test="defaults != null" >
+        #{defaults,jdbcType=VARCHAR},
+      </if>
+       <if test="vistUrl != null" >
+        #{vistUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+ <update id="updateByPrimaryKeySelective" parameterType="com.icloud.model.event.WeixinMaterial" >
+    update T_WEIXIN_MATERIAL
+    <set >
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME = #{modifyTime,jdbcType=DATE},
+      </if>
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null" >
+        PIC_URL = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="wxPicUrl != null" >
+        WX_PIC_URL = #{wxPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="mediaId != null" >
+        MEDIA_ID = #{mediaId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID = #{parentId,jdbcType=NUMERIC},
+      </if>
+      <if test="description != null" >
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="defaults != null" >
+        DEFAULTS = #{defaults,jdbcType=VARCHAR},
+      </if>
+       <if test="vistUrl != null" >
+        VIST_URL = #{vistUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.icloud.model.event.WeixinMaterial" >
+    update T_WEIXIN_MATERIAL
+    set CREATE_TIME = #{createTime,jdbcType=DATE},
+      MODIFY_TIME = #{modifyTime,jdbcType=DATE},
+      TITLE = #{title,jdbcType=VARCHAR},
+      PIC_URL = #{picUrl,jdbcType=VARCHAR},
+      WX_PIC_URL = #{wxPicUrl,jdbcType=VARCHAR},
+      MEDIA_ID = #{mediaId,jdbcType=VARCHAR},
+      PARENT_ID = #{parentId,jdbcType=NUMERIC},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      DEFAULTS = #{defaults,jdbcType=VARCHAR},
+      VIST_URL = #{vistUrl,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=NUMERIC}
+  </update>
+  
+    <update id="updateUnDefault" parameterType="com.icloud.model.event.WeixinMaterial" >
+    	update T_WEIXIN_MATERIAL  set DEFAULTS='0'
+   </update>
+  
+  <select id="findForList" parameterType="com.icloud.model.event.WeixinMaterial" resultMap="BaseResultMap">
+		 select
+		 <include refid="Base_Column_List" />
+   		 from T_WEIXIN_MATERIAL t
+		<where>
+     		 <if test="id != null" >
+      		  	and t.id =  #{id,jdbcType=NUMERIC}
+     		 </if>
+     		 <if test="parentId != null" >
+      		  		and t.parent_id =  #{parentId,jdbcType=NUMERIC}
+     		 </if>
+     		 <if test="mediaId != null and mediaId!='' " >
+      		  	and t.MEDIA_ID =  #{mediaId,jdbcType=VARCHAR}
+     		 </if>
+		</where>
+	</select>
+	
+	<select id="findByPage" parameterType="com.icloud.model.event.WeixinMaterial"
+		resultMap="BaseResultMap">
+			 select 
+	    <include refid="Base_Column_List" />
+	    from T_WEIXIN_MATERIAL t
+	    <trim prefixOverrides="and | or">
+			<where>
+     		 <if test="id != null" >
+      		  	and t.id =  #{id,jdbcType=NUMERIC}
+     		 </if>
+     		  <if test="parentId != null" >
+      		  		and t.parent_id =  #{parentId,jdbcType=NUMERIC}
+     		 </if>
+     		 <if test="mediaId != null and mediaId!='' " >
+      		  	and t.MEDIA_ID =  #{mediaId,jdbcType=VARCHAR}
+     		 </if>
+		</where>
+		</trim>
+		order by t.modify_Time desc
+	</select>
+  
+</mapper>
